@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %}
+{% block title %} Students {% endblock %}
+{% block body %}
+
+
+<a href="{{url_for('students.create')}}" class="btn btn-primary"> Add new Student  </a>
+{{student.track_name}}
+
+{{student.track_name.students}}
+
+<h1> Student </h1>
+<div class="card" style="width: 18rem;">
+  <img src="{{student.get_image_url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{student.name}}</h5>
+    <p class="card-text">{{student.track}}</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+{% endblock %}

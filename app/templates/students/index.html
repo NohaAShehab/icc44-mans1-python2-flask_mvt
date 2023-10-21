@@ -21,7 +21,7 @@
                 <td>{{student['track']}}</td>
                 <td><img width="200" height="200"
                         src="{{url_for('static', filename='students/images/'+student.image)}}">  </td>
-                <td> <a class="btn btn-info" href=""> Show </a></td>
+                <td> <a class="btn btn-info" href="{{student.get_show_url}}"> Show </a></td>
                 <td> <a class="btn btn-danger" href=""> Delete </a></td>
 
             </tr>

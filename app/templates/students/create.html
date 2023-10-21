@@ -17,6 +17,16 @@
         <label for="exampleInputPassword1" class="form-label">Image</label>
         <input type="text" name='image' class="form-control" id="exampleInputPassword1">
     </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Tracks</label>
+        <select class="form-select" name="dept_id" aria-label="Default select example">
+                      <option selected disabled value="">Open this select menu</option>
+
+            {% for track in tracks %}
+          <option value='{{track.id}}'>{{track.name}}</option>
+            {% endfor %}
+</select>
+    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {% endblock%}

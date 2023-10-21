@@ -1,5 +1,6 @@
 
 from flask_sqlalchemy import SQLAlchemy
+from flask import  url_for
 
 db = SQLAlchemy()
 
@@ -11,7 +12,11 @@ class Track(db.Model):
     name = db.Column(db.String)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime,server_onupdate=db.func.now(), server_default=db.func.now())
+    students= db.relationship('Student', backref='track_name', lazy=True)
 
+
+    def __str__(self):
+        return f"{self.name}"
     @classmethod
     def get_all_objects(cls):
         return  cls.query.all()
@@ -31,6 +36,7 @@ class Student(db.Model):
     name = db.Column(db.String)
     image = db.Column(db.String)
     track = db.Column(db.String)
+    dept_id = db.Column(db.Integer, db.ForeignKey('tracks.id'), nullable=True)
 
     @classmethod
     def get_all_objects(cls):
@@ -47,14 +53,18 @@ class Student(db.Model):
         db.session.commit()
         return std
 
-    # @property
-    # def get_image_url(self):
-    #     return url_for('static', filename=f'students/images/{self.image}')
-    #
-    # @property
-    # def get_show_url(self):
-    #     return  url_for('students.show', id=self.id)
-    #
+    @classmethod
+    def get_specific_student(cls, id):
+        return  cls.query.get_or_404(id)
+
+    @property
+    def get_image_url(self):
+        return url_for('static', filename=f'students/images/{self.image}')
+
+    @property
+    def get_show_url(self):
+        return  url_for('students.show', id=self.id)
+
     # @property
     # def get_delete_url(self):
     #     return  url_for('students.delete', id= self.id)

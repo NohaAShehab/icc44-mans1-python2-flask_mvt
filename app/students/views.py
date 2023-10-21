@@ -1,7 +1,8 @@
-from flask import  request,render_template
+from flask import  request,render_template, redirect, url_for
 from app.models import Student, db
 # connect blueprint with views
 from app.students import student_blueprint
+from app.models import Track
 @student_blueprint.route('hello')
 def helloworld():
     return '<h1> Hello world'
@@ -24,8 +25,13 @@ def create():
         # return request.form
         # # return request.form
         student = Student.create_student(request.form)
-        return "addeddddd"
+        return redirect(url_for('students.students_index'))
+
+    tracks = Track.get_all_objects()
+    return render_template('students/create.html', tracks=tracks)
 
 
-    return render_template('students/create.html')
-
+@student_blueprint.route('<int:id>', endpoint='show')
+def show(id):
+    student = Student.get_specific_student(id)
+    return  render_template('students/show.html', student=student)
