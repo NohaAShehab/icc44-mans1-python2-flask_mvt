@@ -1,0 +1,22 @@
+{% extends 'layouts/base.html' %}
+
+{% block  title %} Add New Student {% endblock%}
+
+{% block  body %}
+
+<form method="post">
+    <div class="mb-3">
+        <label for="" class="form-label">Name</label>
+        <input type="text" name='name' class="form-control" id="" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Track</label>
+        <input type="text" name='track' class="form-control" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Image</label>
+        <input type="text" name='image' class="form-control" id="exampleInputPassword1">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock%}

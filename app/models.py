@@ -21,6 +21,21 @@ class Student(db.Model):
     image = db.Column(db.String)
     track = db.Column(db.String)
 
+    @classmethod
+    def get_all_objects(cls):
+        return cls.query.all()
+
+    def save_student(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def create_student(cls, request_form):
+        std = cls(**request_form)
+        db.session.add(std)
+        db.session.commit()
+        return std
+
     # @property
     # def get_image_url(self):
     #     return url_for('static', filename=f'students/images/{self.image}')
