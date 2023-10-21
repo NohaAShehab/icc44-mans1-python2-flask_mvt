@@ -12,6 +12,17 @@ class Track(db.Model):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime,server_onupdate=db.func.now(), server_default=db.func.now())
 
+    @classmethod
+    def get_all_objects(cls):
+        return  cls.query.all()
+
+    @classmethod
+    def save_track(cls, request_data):
+        track  =cls(**request_data)
+        db.session.add(track)
+        db.session.commit()
+        return track
+
 # here where I will create the models
 
 class Student(db.Model):

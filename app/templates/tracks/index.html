@@ -1,0 +1,27 @@
+{% extends 'layouts/base.html' %}
+{% block title %} Tracks {% endblock %}
+{% block body %}
+
+
+<a href="" class="btn btn-primary"> Add new Track  </a>
+<h1> All Tracks  </h1>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Show</th>
+            <th>Delete</th>
+        </tr>
+        {% for track in tracks %}
+            <tr>
+                <td>{{track.id}}</td>
+                <td>{{track.name}}</td>
+                <td> <a class="btn btn-info" href=""> Show </a></td>
+                <td> <a class="btn btn-danger" href=""> Delete </a></td>
+
+            </tr>
+        {% endfor %}
+    </table>
+
+
+{% endblock %}
