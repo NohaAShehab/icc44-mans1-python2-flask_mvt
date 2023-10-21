@@ -17,10 +17,16 @@ def create_app(config_name='dev'):
     app.config.from_object(current_config)
 
 
+    from app.tracks.views import  tracks_index, hellotrack
+    app.add_url_rule('/tracks', view_func=tracks_index, endpoint='tracks.index')
 
-    ## register blueprint in the application
+
+    #register blueprint in the application
     from app.students import student_blueprint
     app.register_blueprint(student_blueprint)
+
+    from app.tracks import  track_blueprint
+    app.register_blueprint(track_blueprint)
 
 
     return app
