@@ -3,12 +3,16 @@
 
 from flask import Flask
 from flask_migrate import Migrate
+from flask_restful import Api
 
 # get db object
 from app.models import  db
 
 from app.config import projectConfig as AppConfig
 
+from app.students.api_views import StudentList, StudentResource
+
+from app.tracks.api_views import TrackListResource
 
 def create_app(config_name='dev'):
     app = Flask(__name__)
@@ -22,6 +26,13 @@ def create_app(config_name='dev'):
     db.init_app(app)
 
     migrate = Migrate(app, db, render_as_batch=True)
+
+    api = Api(app)
+    # add resource class to the api ?
+    api.add_resource(StudentList, '/api/students')
+    api.add_resource(StudentResource, '/api/students/<int:std_id>')
+    api.add_resource(TrackListResource, '/api/tracks')
+
 
 
     from app.tracks.views import  tracks_index, hellotrack
